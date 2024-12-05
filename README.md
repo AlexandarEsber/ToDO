@@ -1,11 +1,12 @@
-# Exercise 2  
-## Alexander Esber - 3725081  
-### Programmentwicklung II - Wintersemester 2024/25  
+# Exercise 2
+
+Alexandar Esber - 3725081
+Programmentwicklung II - Wintersemester 2024/25  
 
 ---
 
 ## Project Overview  
-This project is the second exercise for **Programmentwicklung II**. The backend can be found under the `/api` directory.
+This project is the second exercise for **Programmentwicklung II**. The backend can be found under the `/api` directory and the frontend in the `/frontend` directory.
 
 ---
 
@@ -17,33 +18,28 @@ The project requires **Docker** to build and run the application. Ensure you hav
 ## Instructions  
 
 1. **Navigate to the Project Directory**:  
-   Open your terminal and move to the root directory of the project where the `docker-compose.yml` file is located.
-
-   ```bash
-   cd path/to/project
-   ```
+   Search for the project folder where the `docker-compose.yml` file is located. Right-click on the folder, and you should see the option to "Open in Terminal." From there, you can enter all the following commands.
 
 2. **Build and Run the Docker Image**:  
    Use `docker-compose` to build the Docker image and run the application. The following command will handle both building and starting the container:
 
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
 3. **Access the Application**:  
    Once the container is running, you can access the backend services exposed via Docker.
 
----
+   For detailed backend documentation or API usage, refer to the README within the `/api` directory !!!
 
-## Notes  
+4. **Shutdown the Application**
+   After you are done using the application, you can stop it by entering the following command in the same directory:
 
-- Stop the application by running the following command in the same directory:
-  
-  ```bash
-  docker-compose down
+   ```bash
+  docker compose down
   ```
 
-- For detailed backend documentation or API usage, refer to the README within the `/api` directory.
+
 
 ---
 
