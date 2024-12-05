@@ -36,8 +36,8 @@ The project requires **Docker** to build and run the application. Ensure you hav
    After you are done using the application, you can stop it by entering the following command in the same directory:
 
    ```bash
-  docker compose down
-  ```
+   docker compose down
+   ```
 
 
 
