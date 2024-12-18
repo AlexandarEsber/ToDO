@@ -17,7 +17,6 @@ import org.springframework.web.server.ResponseStatusException;
 import de.unistuttgart.iste.pe2.api.ApiVersion1;
 import de.unistuttgart.iste.pe2.api.ToDos.ToDo;
 import de.unistuttgart.iste.pe2.api.ToDos.ToDoRepository;
-import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 
 @RestController
