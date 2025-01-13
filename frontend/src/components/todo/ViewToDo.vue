@@ -1,10 +1,19 @@
 <script setup lang="ts">
+/**
+ * Component that displays detailed information about a specific ToDo item.
+ * Features:
+ * - Dialog with read-only view of ToDo details
+ * - Displays title, description, assignees, and dates
+ * - Shows creation date, due date, and finished date if available
+ * - Shows category information
+ * - Error handling with toast notifications
+ */
+
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -19,7 +28,6 @@ import { onMounted } from 'vue';
 import Label from '../ui/label/Label.vue';
 import type { PropType } from 'vue';
 import Textarea from '../ui/textarea/Textarea.vue';
-import ToDosTab from './ToDosTab.vue';
 
 const { toast } = useToast();
 const todo: Ref<ToDo | undefined> = ref();
@@ -121,6 +129,12 @@ onMounted(() => fetchToDoById());
             finished Date
           </Label>
           <Input id="finished-date" :modelValue="formatDate(todo?.finishedDate)" disabled class="col-span-3" />
+        </div>
+        <div class="grid grid-cols-4 items-center gap-4">
+          <Label for="category" class="text-right">
+            Category
+          </Label>
+          <Input id="category" :modelValue="todo?.category" disabled class="col-span-3" />
         </div>
       </div>
     </DialogContent>

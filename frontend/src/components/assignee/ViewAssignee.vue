@@ -1,10 +1,18 @@
 <script setup lang="ts">
+/**
+ * Component that displays detailed information about a specific assignee.
+ * Features:
+ * - Dialog with read-only view of assignee details
+ * - Displays prename, name, and email
+ * - Fetches assignee data from server
+ * - Error handling with toast notifications
+ */
+
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,

@@ -1,4 +1,14 @@
 <script setup lang="ts">
+/**
+ * Component that provides a dialog for creating new assignees.
+ * Features:
+ * - Form validation for assignee data
+ * - Input fields for prename, name, and email
+ * - Email validation for uni-stuttgart.de domain
+ * - Server communication for creating new assignees
+ * - Toast notifications for success/error feedback
+ */
+
 import { Button } from '@/components/ui/button'
 import {
   Dialog,

@@ -73,7 +73,7 @@ Open the Folder api in IntelliJ.
 
 1. Open Windows Terminal, PowerShell.
 2. Change directory: `cd C:\git-repositories\repo059`
-3. Execute `docker compose up` (Background: This uses [docker-compose.yml](docker-compose.yml)).
+3. Execute `docker compose up --build` (Background: This uses [docker-compose.yml](docker-compose.yml)).
 
 If necessary, update the [API configuration file](src/main/resources/application.properties) with your database port (default is `3306`) and credentials (default is `root`:`root`).
 

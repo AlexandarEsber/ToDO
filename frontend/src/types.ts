@@ -14,4 +14,5 @@ export interface ToDo {
     createdDate: number;
     dueDate: number;
     finishedDate: number;
+    category: string;
 }

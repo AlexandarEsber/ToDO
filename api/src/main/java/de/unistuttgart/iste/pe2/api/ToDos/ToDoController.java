@@ -27,6 +27,10 @@ import de.unistuttgart.iste.pe2.api.Assignees.AssigneeRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 
+/**
+ * REST Controller for managing ToDo operations.
+ * Provides endpoints for CRUD operations on ToDo items and related functionalities.
+ */
 @RestController
 @ApiVersion1
 public class ToDoController {
@@ -37,6 +41,12 @@ public class ToDoController {
     @Autowired
     private AssigneeRepository assigneeRepository;
 
+    @Autowired
+    private PredictService predictService;
+
+    /**
+     * Initializes the controller with sample data if the database is empty.
+     */
     @PostConstruct
     public void init() {
         long numberOfAssignees = assigneeRepository.count();
@@ -51,28 +61,44 @@ public class ToDoController {
      
         long numberOfToDos = toDoRepository.count();
         if(numberOfToDos == 0){
-            ToDo newToDo = new ToDo("Washing Dishes", "You have to help the Prof washing his Dishes", false, Date.valueOf("2025-11-21"));
+            ToDo newToDo = new ToDo("Washing Dishes", "You have to help the Prof washing his Dishes", false, Date.valueOf("2025-11-21"), predictService.predictCategory("Washing Dishes"));
             newToDo.setAssigneeList(list1);
             toDoRepository.save(newToDo);
-            ToDo newToDo2 = new ToDo("GroupMeeting","Group Meeting for PE2",true, Date.valueOf("2025-11-19"));
+            ToDo newToDo2 = new ToDo("Group Meeting","Group Meeting for PE2",true, Date.valueOf("2025-11-19"), predictService.predictCategory("Group Meeting"));
             newToDo2.setAssigneeList(list2);
             toDoRepository.save(newToDo2);
         }
     }
 
-    // get all Todos
+    /**
+     * Retrieves all ToDo items.
+     *
+     * @return List of all ToDo items
+     */
     @GetMapping("/todos")
     public List<ToDo> getToDos(){
         return (List<ToDo>) toDoRepository.findAll();
     }
 
-    // get a Single Todo by Id
+    /**
+     * Retrieves a single ToDo item by its ID.
+     *
+     * @param id ID of the ToDo item
+     * @return ToDo object
+     * @throws ResponseStatusException if the ToDo item is not found
+     */
     @GetMapping("/todos/{id}")
     public ToDo getTodoById(@PathVariable("id") Long id) throws ResponseStatusException{
         return toDoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Todo with id %s not found", id)));
     }
 
-    // create an Todo
+    /**
+     * Creates a new ToDo item.
+     *
+     * @param toDoRequest ToDo object to be created
+     * @return Created ToDo object
+     * @throws ResponseStatusException if validation fails
+     */
     @PostMapping("/todos")
     @ResponseStatus(HttpStatus.CREATED)
     public ToDo createTodo(@Valid @RequestBody ToDo toDoRequest){
@@ -89,7 +115,6 @@ public class ToDoController {
             toDoRequest.setDueDate(new Date(dueDateMillis));
         }
         
-
         // Validate assigneeIdList
         List<Long> assigneeIdList = toDoRequest.getAssigneeIdList();
         if (assigneeIdList != null && !assigneeIdList.isEmpty()) {
@@ -108,13 +133,23 @@ public class ToDoController {
             toDoRequest.setAssigneeList(assignees);
         }
 
+        // Predict the category of the todo
+        toDoRequest.setCategory(predictService.predictCategory(toDoRequest.getTitle()));
+
         // Save the ToDo entity
         toDoRepository.save(toDoRequest);
 
         return toDoRequest;
     }
 
-
+    /**
+     * Updates an existing ToDo item.
+     *
+     * @param id ID of the ToDo item to update
+     * @param requestBody Updated ToDo object
+     * @return Updated ToDo object
+     * @throws ResponseStatusException if ToDo not found or validation fails
+     */
     @PutMapping("/todos/{id}")
     public ToDo updateTodo(@PathVariable("id") long id, @Valid @RequestBody ToDo requestBody) {
         requestBody.setId(id);
@@ -156,10 +191,20 @@ public class ToDoController {
             requestBody.setAssigneeList(assignees);
         }
 
+        // Predict the category of the todo
+        requestBody.setCategory(predictService.predictCategory(requestBody.getTitle()));
+
         // Save the ToDo entity
         return toDoRepository.save(requestBody);
     }
 
+    /**
+     * Deletes a ToDo item by its ID.
+     *
+     * @param id ID of the ToDo item to delete
+     * @return ResponseEntity with success message
+     * @throws ResponseStatusException if ToDo not found
+     */
     @DeleteMapping("/todos/{id}")
     public ResponseEntity<Map<String, String>> deleteTodo(@PathVariable("id") long id){
         toDoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Todo with id %s not found", id)));
@@ -167,5 +212,17 @@ public class ToDoController {
         Map<String, String> response = new HashMap<>();
         response.put("message", String.format("Todo with id %s has been deleted", id));
         return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Exports all ToDo items to CSV format.
+     *
+     * @return ResponseEntity containing CSV data of all ToDos
+     */
+    @GetMapping("/csv-downloads/todos")
+    public ResponseEntity<String> exportTodosToCSV() {
+        return ResponseEntity.ok()
+            .header("Content-Type", "text/csv")
+            .body(CSVHelper.TodosToCSV(toDoRepository.findAll()));
     }
 }

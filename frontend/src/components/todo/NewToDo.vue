@@ -1,10 +1,21 @@
 <script setup lang="ts">
+/**
+ * Component that provides a dialog for creating new ToDo items.
+ * Features:
+ * - Form validation for ToDo data
+ * - Input fields for title and description
+ * - Multiple assignee selection
+ * - Due date selection with calendar
+ * - Server communication for creating new ToDos
+ * - Toast notifications for success/error feedback
+ */
+
 import { Button } from '@/components/ui/button'
-import { CalendarDate, DateFormatter, getLocalTimeZone, parseDate, today } from '@internationalized/date'
+import { DateFormatter, getLocalTimeZone, parseDate, today } from '@internationalized/date'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Calendar } from '@/components/ui/calendar'
 import { CalendarIcon } from '@radix-icons/vue'
-import type { Assignee, ToDo } from "@/types";
+import type { Assignee } from "@/types";
 import {
   Dialog,
   DialogContent,
@@ -15,20 +26,16 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { LayoutList } from 'lucide-vue-next';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as z from 'zod';
 import { useForm, configure } from 'vee-validate';
-import axios from "axios";
 import { useToast } from '@/components/ui/toast/use-toast';
 import config from "@/config";
 import EventBus from "@/EventBus";
 import { computed, ref } from 'vue'
-import assignees from '@/components/assignee/AssigneesTab.vue'
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,

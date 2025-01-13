@@ -19,6 +19,10 @@ import de.unistuttgart.iste.pe2.api.ToDos.ToDo;
 import de.unistuttgart.iste.pe2.api.ToDos.ToDoRepository;
 import jakarta.validation.Valid;
 
+/**
+ * REST Controller for managing Assignee operations.
+ * Provides endpoints for CRUD operations on Assignee entities.
+ */
 @RestController
 @ApiVersion1
 public class AssigneeController {
@@ -29,33 +33,35 @@ public class AssigneeController {
     @Autowired
     private ToDoRepository toDoRepository;
 
-    /*
-    @PostConstruct
-    public void init() {
 
-        long numberOfAssignees = assigneeRepository.count();
-        if(numberOfAssignees == 0) {
-            Assignee newAssignee = new Assignee("Max","Alex","st188886@stud.uni-stuttgart.de");
-            assigneeRepository.save(newAssignee);
-            Assignee newAssignee2 = new Assignee("Fabian","Sam","st192938@stud.uni-stuttgart.de");
-            assigneeRepository.save(newAssignee2);
-        }
-    }
- */
-    // get all Assignees
+    /**
+     * Retrieves all Assignees.
+     *
+     * @return List of all Assignee objects
+     */
     @GetMapping("/assignees")
     public List<Assignee> getAssignees(){
         return (List<Assignee>) assigneeRepository.findAll();
     }
 
-    // get a Single Assignee by Id
+    /**
+     * Retrieves a single Assignee by their ID.
+     *
+     * @param id ID of the Assignee
+     * @return Assignee object
+     * @throws ResponseStatusException if Assignee not found
+     */
     @GetMapping("/assignees/{id}")
     public Assignee getAssigneeById(@PathVariable("id") Long id) throws ResponseStatusException{
         return assigneeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Assignee with id %s not found", id)));
     }
 
-
-    // create an Assignee
+    /**
+     * Creates a new Assignee.
+     *
+     * @param requestAssignee Assignee object to be created
+     * @return Created Assignee object
+     */
     @PostMapping("/assignees")
     @ResponseStatus(HttpStatus.CREATED)
     public Assignee createAssignee(@Valid @RequestBody Assignee requestAssignee){
@@ -63,6 +69,14 @@ public class AssigneeController {
         return assigneeRepository.save(newAssignee);
     }
 
+    /**
+     * Updates an existing Assignee.
+     *
+     * @param id ID of the Assignee to update
+     * @param requestBody Updated Assignee object
+     * @return Updated Assignee object
+     * @throws ResponseStatusException if Assignee not found
+     */
     @PutMapping("/assignees/{id}")
     public Assignee updateAssignee(@PathVariable("id") long id, @Valid @RequestBody Assignee requestBody) {
         requestBody.setId(id);
@@ -70,6 +84,13 @@ public class AssigneeController {
         return assigneeRepository.save(requestBody);
     }
 
+    /**
+     * Deletes an Assignee and removes them from all associated ToDos.
+     *
+     * @param id ID of the Assignee to delete
+     * @return Deleted Assignee object
+     * @throws ResponseStatusException if Assignee not found
+     */
     @DeleteMapping("/assignees/{id}")
     public Assignee deleteAssignee(@PathVariable("id") long id){
         Assignee assigneeToDelete = assigneeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Assignee with id %s not found", id)));

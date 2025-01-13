@@ -1,4 +1,14 @@
 <script setup lang="ts">
+/**
+ * Component that provides functionality to edit existing assignees.
+ * Features:
+ * - Pre-filled form with current assignee data
+ * - Form validation for updated data
+ * - Email validation for uni-stuttgart.de domain
+ * - Server communication for updating assignee information
+ * - Toast notifications for success/error feedback
+ */
+
 import { Button } from '@/components/ui/button'
 import {
   Dialog,

@@ -1,4 +1,14 @@
 <script setup lang="ts">
+/**
+ * Component that displays a list of assignees and provides functionality to manage them.
+ * Features include:
+ * - Displaying all assignees in a card layout
+ * - Creating new assignees
+ * - Editing existing assignees
+ * - Deleting assignees
+ * - Viewing assignee details
+ */
+
 import { Card } from '@/components/ui/card'
 import type { Assignee } from "@/types";
 import { onMounted, type Ref, ref } from "vue";
