@@ -6,18 +6,18 @@
 
 | Kriterium                    | erreichte Punkte / maximale Punkte |
 | ---------------------------- |------------------------------------|
-| Funktionalität der API       | 20 / 25                            |
+| Funktionalität der API       | 25 / 25                            |
 | DB-Persistenz                | 3 / 3                              |
-| Funktionalität des Frontends | 18 / 22                            |
-| Usability                    | 5 / 5                              |
+| Funktionalität des Frontends | 21 / 22                            |
+| Usability                    | 4 / 5                              |
 | Design-Qualität              | 5 / 5                              |
-| Code-Qualität                | 4 / 5                              |
-| Repository und README        | 4,5 / 5                            |
-| **Summe**:                   | 59,5 / 70                          |
-| **Note**:                    | 2,0                                |
+| Code-Qualität                | 5 / 5                              |
+| Repository und README        | 2 / 5                              |
+| **Summe**:                   | 65 / 70                            |
+| **Note**:                    | 1,3                                |
 
 
-## Funktionalität der API (__ / 25)
+## Funktionalität der API (25 / 25)
 > Anforderungen für maximale Punktzahl: API hat alle geforderten Ressourcen (URLs plus Request und Response Bodies) mit korrekter Funktionalität, d.h., alle [automatisierten API-Tests](https://github.tik.uni-stuttgart.de/ISTE-ESE/pe2-api-tests-ex4) wurden bestanden.
 > Pro bestandenem Testfall gibt es eine bestimmte Menge an Punkten (siehe unten).
 
@@ -53,10 +53,10 @@ Detaillierte Auswertung für alle API-Tests:
   - [x] (1 Punkt) Test `delete the created todo (200)`
   - [x] (1 Punkt) Test `edit for non-existing todo fails (404)`
   - [x] (1 Punkt) Test `delete for non-existing todo fails (404)`
-  - [ ] (2 Punkte) Test `CSV export for todos is valid (200, application/csv or text/csv)` <span style="color: red">(NEU)</span>
+  - [x] (2 Punkte) Test `CSV export for todos is valid (200, application/csv or text/csv)` <span style="color: red">(NEU)</span>
 - ToDo-Kategorien (0 / 3 Punkte) <span style="color: red">(NEU)</span>
-  - [ ] (1,5 Punkte) Beim Erstellen eines `ToDos` wird eine durch das ML-Modell generierte Kategorie hinzugefügt.
-  - [ ] (1,5 Punkte) Beim Update eines `ToDos` wird die durch das ML-Modell generierte Kategorie aktualisiert.
+  - [x] (1,5 Punkte) Beim Erstellen eines `ToDos` wird eine durch das ML-Modell generierte Kategorie hinzugefügt.
+  - [x] (1,5 Punkte) Beim Update eines `ToDos` wird die durch das ML-Modell generierte Kategorie aktualisiert.
 
 
 ## Persistenz über DB (3 / 3)
@@ -65,7 +65,7 @@ Detaillierte Auswertung für alle API-Tests:
 - [x] (1 Punkte) `ToDos` werden vollständig in einer DB-Tabelle persistiert
 - [x] (1 Punkt) Mapping zwischen `Assignees` und `ToDos` wird vollständig in einer DB-Tabelle persistiert
 
-## Funktionalität des Frontends (18 / 22)
+## Funktionalität des Frontends (21 / 22)
 > Anforderungen für maximale Punktzahl: Frontend hat alle geforderten Views / View-Elemente mit korrekter Funktionalität, vollständige Integration mit der API, Browser-Console (F12) enthält keine Fehler
 
 - [x] (8 / 8 Punkte) View zur Verwaltung von `Assignees`
@@ -82,16 +82,16 @@ Detaillierte Auswertung für alle API-Tests:
   - [x] (1 Punkt) View-Elemente für `DELETE /todos/$id`
   - [x] (1 Punkt) Einfaches Abhaken von `ToDos` möglich
   - [x] (1 Punkt) Abgehakte `ToDos` sind getrennt von offenen
-  - [ ] (1 Punkt) `ToDos` sind filterbar nach `title`
-  - [ ] (1 Punkt) `ToDos` sind sortierbar nach `title` und `dueDate`
-  - [ ] (1 Punkt) View-Elemente für `GET /csv-downloads/todos` (CSV-Export und Speicherung der Datei) <span style="color: red">(NEU)</span>
-  - [ ] (1 Punkt) View-Elemente zur Anzeige der Kategorie bei `GET /todos` und `GET /todos/$id` <span style="color: red">(NEU)</span>
-- [x] (1 Punkt) Browser-Console (F12) zeigt keine JS Errors an
+  - [x] (1 Punkt) `ToDos` sind filterbar nach `title`
+  - [x] (1 Punkt) `ToDos` sind sortierbar nach `title` und `dueDate`
+  - [x] (1 Punkt) View-Elemente für `GET /csv-downloads/todos` (CSV-Export und Speicherung der Datei) <span style="color: red">(NEU)</span>
+  - [x] (1 Punkt) View-Elemente zur Anzeige der Kategorie bei `GET /todos` und `GET /todos/$id` <span style="color: red">(NEU)</span>
+- [ ] (1 Punkt) Browser-Console (F12) zeigt keine JS Errors an // Email ada@-uni-stuttgart.de wirft fehler
 
-## Usability (5 / 5) <span style="color: red">(NEU)</span>
+## Usability (4 / 5) <span style="color: red">(NEU)</span>
 
 - [x] (1 Punkt) Sinnvolle Systemrückmeldungen sind vorhanden (z.B. erfolgreiches Bearbeiten)
-- [x] (1 Punkt) Mögliche Anwenderfehler werden minimiert, konkrete Fehler werden kommuniziert (z.B. bei HTTP 400)
+- [ ] (1 Punkt) Mögliche Anwenderfehler werden minimiert, konkrete Fehler werden kommuniziert (z.B. bei HTTP 400) // Email ada@-uni-stuttgart.de wirft fehler
 - [x] (1 Punkt) Gängige UI Components werden passend eingesetzt (z.B. Tables, MultiSelects, DatePicker, etc.)
 - [x] (1 Punkt) UI ist verständlich und stellt notwendige Informationen effizient bereit (z.B. wenige Klicks notwendig, keine manuelle Eingabe von IDs)
 - [x] (1 Punkt) Terminologie, Farben und Layout sind konsistent
@@ -107,21 +107,21 @@ Detaillierte Auswertung für alle API-Tests:
 
 <sup>**1**</sup> Dies wird bereits durch die Testfälle überprüft, daher gibt es hierfür keinen zusätzlichen Punktabzug.
 
-## Code-Qualität (4 / 5) <span style="color: red">(NEU)</span>
+## Code-Qualität (5 / 5) <span style="color: red">(NEU)</span>
 
 - [x] (1 Punkt) Code ist konsistent formatiert
 - [x] (1 Punkt) Code ist hinreichend kommentiert
-- [ ] (1 Punkt) Kein auskommentierter Code, keine unbenutzten Variablen, Funktionen oder Importe
+- [x] (1 Punkt) Kein auskommentierter Code, keine unbenutzten Variablen, Funktionen oder Importe
 - [x] (1 Punkt) Sinnvoll benannte Variablen und Funktionen
 - [x] (1 Punkt) Nicht zu komplexe / lange Funktionen
 
-## Repository und README (4,5 / 5)
+## Repository und README (2 / 5)
 
 - [x] (1 Punkt) Repository-Struktur folgt dem Beispielprojekt (`api` und `frontend` auf höchster Ebene)
 - [x] (1 Punkt) Keine IDE-spezifischen Dateien (z.B. `.idea`, `.vscode`, etc.) oder Binaries / Libraries (z.B. `target`, `node_modules`, etc.) im Repository
-- [x] (1 Punkt) Git tag `v0.4` vorhanden
-- [x] (1 Punkt) DB- und API-Konfiguration entspricht dem Beispielprojekt (keine Änderungen für Korrektur nötig)
-- [x] (0,5 Punkte) Keine Dummy-Dateien oder irrelevanter Text aus dem Beispiel-Projekt mehr vorhanden
+- [ ] (1 Punkt) Git tag `v0.4` vorhanden // zeigt auf falschen Commit
+- [ ] (1 Punkt) DB- und API-Konfiguration entspricht dem Beispielprojekt (keine Änderungen für Korrektur nötig) // falscher host
+- [ ] (0,5 Punkte) Keine Dummy-Dateien oder irrelevanter Text aus dem Beispiel-Projekt mehr vorhanden // "cats" in README.md
 - [ ] (0,5 Punkte) README enthält klare, IDE-unabhängige Anweisungen zur Ausführung der Applikation
 
 
