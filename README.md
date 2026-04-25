@@ -1,12 +1,11 @@
 # Rest Api and Frontend Project for PE-II
 
-Alexandar Esber - 3725081
-Programmentwicklung II - Wintersemester 2024/25  
+Alexandar Esber - Wintersemester 2024/25  
 
 ---
 
 ## Project Overview  
-This project is the third exercise for **Programmentwicklung II**. The backend can be found under the `/api` directory and the frontend in the `/frontend` directory.
+This project is an exercise for my university and was developed entirely by me. The backend can be found in the `/api` directory, and the frontend in the `/frontend` directory.
 
 ---
 
